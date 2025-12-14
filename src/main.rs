@@ -1,3 +1,5 @@
+mod secondary;
+
 fn take_control(name: String) -> String {
     let mut some_new = String::from("test");
     some_new.push_str(&name);
@@ -6,6 +8,18 @@ fn take_control(name: String) -> String {
 
 fn triple(number: i32) -> i32 {
     return number * 3;
+}
+
+// Shouldn't take ownership
+fn get_char(data: &String) -> char {
+    data.chars().last().unwrap()
+}
+
+// Should take ownership
+fn string_uppercase(mut data: String) {
+    data = data.to_uppercase();
+
+    println!("{data}");
 }
 
 fn main() {
@@ -60,7 +74,13 @@ fn main() {
 
     println!("{name} is {age} years old");
 
+    let data = "Rust is great!".to_string();
+
+    get_char(&data);
+
+    string_uppercase(data);
 }
+
 
 // TODO: Fix the compiler error on this function.
 fn picky_eater(food: &str) -> &str {
@@ -104,11 +124,10 @@ fn array_and_vec() -> ([i32; 4], Vec<i32>) {
     // Use the vector macro.
 
     // let v = vec![10, 20, 30, 40];
-    let v= Vec::from(a);
+    let v = Vec::from(a);
 
     return (a, v);
 }
-
 
 fn vec_loop(input: &[i32]) -> Vec<i32> {
     let mut output = Vec::new();
@@ -133,7 +152,6 @@ fn fill_vec2(mut vec: Vec<i32>) -> Vec<i32> {
 
     vec
 }
-
 
 // Don't change the tests!
 #[cfg(test)]
@@ -176,7 +194,7 @@ mod tests {
         z.push(13);
         assert_eq!(x, [42, 13]);
     }
-    
+
     #[test]
     fn test_vec_loop() {
         let input = [2, 4, 6, 8, 10];
