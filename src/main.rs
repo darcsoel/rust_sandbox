@@ -8,7 +8,6 @@ fn triple(number: i32) -> i32 {
     return number * 3;
 }
 
-
 fn main() {
     println!("Hello, world!");
 
@@ -25,11 +24,10 @@ fn main() {
     let mut counter = 0;
     let some_number = loop {
         counter += 1;
-        
+
         if counter == 10 {
             break counter;
         }
-
     };
 
     println!("{some_number}");
@@ -43,6 +41,24 @@ fn main() {
     for number in (1..10).rev() {
         println!("{number}");
     }
+
+    // let a = 1..100; // iterator, 1..99 included
+    let a = [42; 100]; // 100 elements, each has value of 42
+
+    if a.len() >= 100 {
+        println!("Wow, that's a big array!");
+    } else {
+        let temp = a.len();
+        println!("Meh, I eat arrays like that for breakfast.");
+        panic!("Array not big enough, more elements needed, more that [{temp}]");
+    }
+
+    let cat = ("Furry McFurson", 3.5);
+
+    // TODO: Destructure the `cat` tuple in one statement so that the println works.
+    let (name, age) = cat;
+
+    println!("{name} is {age} years old");
 
 }
 
@@ -81,10 +97,28 @@ fn animal_habitat(animal: &str) -> &str {
     }
 }
 
+fn array_and_vec() -> ([i32; 4], Vec<i32>) {
+    let a: [i32; 4] = [10, 20, 30, 40]; // Array
+
+    // TODO: Create a vector called `v` which contains the exact same elements as in the array `a`.
+    // Use the vector macro.
+    
+    // let v = vec![10, 20, 30, 40];
+    let v= Vec::from(a);
+
+    return (a, v);
+}
+
 // Don't change the tests!
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn test_array_and_vec_similarity() {
+        let (a, v) = array_and_vec();
+        assert_eq!(a, *v);
+    }
 
     #[test]
     fn yummy_food() {
@@ -122,5 +156,26 @@ mod tests {
     #[test]
     fn unknown_animal() {
         assert_eq!(animal_habitat("dinosaur"), "Unknown")
+    }
+
+    #[test]
+    fn slice_out_of_array() {
+        let a = [1, 2, 3, 4, 5];
+
+        // TODO: Get a slice called `nice_slice` out of the array `a` so that the test passes.
+        let nice_slice = &a[1..4];
+
+        assert_eq!([2, 3, 4], nice_slice);
+    }
+
+    #[test]
+    fn indexing_tuple() {
+        let numbers = (1, 2, 3);
+
+        // TODO: Use a tuple index to access the second element of `numbers`
+        // and assign it to a variable called `second`.
+        let second = numbers.1;
+
+        assert_eq!(second, 2, "This is not the 2nd number in the tuple!");
     }
 }
