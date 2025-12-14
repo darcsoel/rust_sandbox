@@ -102,17 +102,87 @@ fn array_and_vec() -> ([i32; 4], Vec<i32>) {
 
     // TODO: Create a vector called `v` which contains the exact same elements as in the array `a`.
     // Use the vector macro.
-    
+
     // let v = vec![10, 20, 30, 40];
     let v= Vec::from(a);
 
     return (a, v);
 }
 
+
+fn vec_loop(input: &[i32]) -> Vec<i32> {
+    let mut output = Vec::new();
+
+    for element in input {
+        output.push(*element * 2);
+    }
+
+    output
+}
+
+fn fill_vec(vec: Vec<i32>) -> Vec<i32> {
+    let mut vec = vec;
+
+    vec.push(88);
+
+    vec
+}
+
+fn fill_vec2(mut vec: Vec<i32>) -> Vec<i32> {
+    vec.push(88);
+
+    vec
+}
+
+
 // Don't change the tests!
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn move_semantics1() {
+        let vec0 = vec![22, 44, 66];
+        let vec1 = fill_vec(vec0);
+        assert_eq!(vec1, vec![22, 44, 66, 88]);
+    }
+
+    #[test]
+    fn move_semantics2() {
+        let vec0 = vec![22, 44, 66];
+
+        let vec1 = fill_vec(vec0.clone());
+
+        assert_eq!(vec0, [22, 44, 66]);
+        assert_eq!(vec1, [22, 44, 66, 88]);
+    }
+
+    #[test]
+    fn move_semantics3() {
+        let vec0 = vec![22, 44, 66];
+        let vec1 = fill_vec2(vec0.clone());
+        assert_eq!(vec1, [22, 44, 66, 88]);
+        assert_eq!(vec0, [22, 44, 66]);
+    }
+
+    // TODO: Fix the compiler errors only by reordering the lines in the test.
+    // Don't add, change or remove any line.
+    #[test]
+    fn move_semantics4() {
+        let mut x = Vec::new();
+        let y = &mut x;
+        y.push(42);
+        let z = &mut x;
+        z.push(13);
+        assert_eq!(x, [42, 13]);
+    }
+    
+    #[test]
+    fn test_vec_loop() {
+        let input = [2, 4, 6, 8, 10];
+        let ans = vec_loop(&input);
+        assert_eq!(ans, [4, 8, 12, 16, 20]);
+    }
 
     #[test]
     fn test_array_and_vec_similarity() {
