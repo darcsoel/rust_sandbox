@@ -1,4 +1,8 @@
 mod secondary;
+mod structures_sandbox;
+mod enums;
+
+use crate::enums::enums;
 
 fn take_control(name: String) -> String {
     let mut some_new = String::from("test");
@@ -79,6 +83,8 @@ fn main() {
     get_char(&data);
 
     string_uppercase(data);
+
+    enums();
 }
 
 
@@ -152,6 +158,7 @@ fn fill_vec2(mut vec: Vec<i32>) -> Vec<i32> {
 
     vec
 }
+
 
 // Don't change the tests!
 #[cfg(test)]
