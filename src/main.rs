@@ -1,6 +1,6 @@
+mod enums;
 mod secondary;
 mod structures_sandbox;
-mod enums;
 
 use crate::enums::enums;
 
@@ -15,7 +15,7 @@ fn triple(number: i32) -> i32 {
 }
 
 // Shouldn't take ownership
-fn get_char(data: &String) -> char {
+fn get_char(data: &str) -> char {
     data.chars().last().unwrap()
 }
 
@@ -80,13 +80,13 @@ fn main() {
 
     let data = "Rust is great!".to_string();
 
-    get_char(&data);
+    let last_char = get_char(&data);
+    println!("last char from reference = {last_char}");
 
     string_uppercase(data);
 
     enums();
 }
-
 
 // TODO: Fix the compiler error on this function.
 fn picky_eater(food: &str) -> &str {
@@ -158,7 +158,6 @@ fn fill_vec2(mut vec: Vec<i32>) -> Vec<i32> {
 
     vec
 }
-
 
 // Don't change the tests!
 #[cfg(test)]

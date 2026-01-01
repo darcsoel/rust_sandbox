@@ -1,8 +1,7 @@
 #[derive(Debug)]
 enum Message {
-    Resize
+    Resize,
 }
-
 
 pub fn enums() {
     println!("---{:?}", Message::Resize);

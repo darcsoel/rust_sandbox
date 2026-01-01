@@ -1,15 +1,13 @@
 struct ColorRegularStruct {
-   red: u8,
-   green: u8,
-   blue: u8
+    red: u8,
+    green: u8,
+    blue: u8,
 }
 
 struct ColorTupleStruct(u8, u8, u8);
 
 #[derive(Debug)]
 struct UnitStruct;
-
-
 
 #[derive(Debug)]
 struct Order {
@@ -34,7 +32,6 @@ fn create_order_template() -> Order {
     }
 }
 
-
 #[derive(Debug)]
 pub struct Package {
     sender_country: String,
@@ -58,7 +55,7 @@ impl Package {
     }
 
     // TODO: Add the correct return type to the function signature.
-    fn is_international(&self) -> bool{
+    fn is_international(&self) -> bool {
         return self.sender_country != self.recipient_country;
     }
 
@@ -67,7 +64,6 @@ impl Package {
         return self.weight_in_grams * cents_per_gram;
     }
 }
-
 
 mod tests {
     use super::*;
@@ -119,7 +115,11 @@ mod tests {
         let order_template = create_order_template();
 
         // TODO: Create your own order using the update syntax and template above!
-        let your_order = Order {name: "Hacker in Rust".to_string(), count: 1, ..order_template};
+        let your_order = Order {
+            name: "Hacker in Rust".to_string(),
+            count: 1,
+            ..order_template
+        };
 
         assert_eq!(your_order.name, "Hacker in Rust");
         assert_eq!(your_order.year, order_template.year);
@@ -133,7 +133,11 @@ mod tests {
     #[test]
     fn regular_structs() {
         // TODO: Instantiate a regular struct.
-        let green = ColorRegularStruct {red: 0, green: 255, blue: 0};
+        let green = ColorRegularStruct {
+            red: 0,
+            green: 255,
+            blue: 0,
+        };
 
         assert_eq!(green.red, 0);
         assert_eq!(green.green, 255);
