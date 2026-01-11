@@ -20,10 +20,11 @@ fn get_char(data: &str) -> char {
 }
 
 // Should take ownership
-fn string_uppercase(mut data: String) {
-    data = data.to_uppercase();
+fn string_uppercase(data: String) -> String {
+    let data = data.to_uppercase();
 
     println!("{data}");
+    return data;
 }
 
 fn main() {
@@ -83,9 +84,12 @@ fn main() {
     let last_char = get_char(&data);
     println!("last char from reference = {last_char}");
 
-    string_uppercase(data);
+    let data2 = string_uppercase(data.clone());
 
-    enums();
+    println!("{data}");
+    println!("{data2}");
+
+    enums()
 }
 
 // TODO: Fix the compiler error on this function.
