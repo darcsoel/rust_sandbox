@@ -2,8 +2,6 @@ mod enums;
 mod secondary;
 mod structures_sandbox;
 
-use crate::enums::enums;
-
 fn take_control(name: String) -> String {
     let mut some_new = String::from("test");
     some_new.push_str(&name);
@@ -88,8 +86,6 @@ fn main() {
 
     println!("{data}");
     println!("{data2}");
-
-    enums()
 }
 
 // TODO: Fix the compiler error on this function.
